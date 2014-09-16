@@ -10,6 +10,8 @@
 #
 
 class CardAssignment < ActiveRecord::Base
-  belongs_to :card
-  belongs_to :user
+  belongs_to :card, inverse_of: :card_assignments
+  belongs_to :user, inverse_of: :card_assignments
+
+  validates :card, :user, presence: true
 end

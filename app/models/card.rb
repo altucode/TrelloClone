@@ -18,4 +18,6 @@ class Card < ActiveRecord::Base
   has_many :users, through: :card_assignments, source: :user
 
   default_scope { order(:ord) }
+
+  validates :list, presence: true
 end

@@ -8,7 +8,7 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
   },
 
   boardShow: function(id) {
-    var board = TrelloClone.Collections.boards.getOrFetch(id);
+    var board = this.boards().getOrFetch(id);
     var boardView = new TrelloClone.Views.Board({ model: board });
     this._swapView(boardView);
   },
@@ -18,5 +18,12 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
 
     $("#content").html(newView.render().$el);
     this._currentView = newView;
+  },
+
+  boards: function() {
+    return this._boards || (this._boards = new TrelloClone.Collection([], {
+      model: TrelloClone.Models.Board,
+      url: 'api/boards'
+    }));
   }
 });

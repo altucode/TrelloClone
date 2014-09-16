@@ -1,3 +1,4 @@
 TrelloClone.Models.Item = Backbone.Model.extend({
-  name: "item"
+  name: "item",
+  urlRoot: "api/items"
 });

@@ -16,6 +16,11 @@
 @import "bootstrap";
 @import "font-awesome";
 
+* {
+  font-family: inherit;
+  box-style: border-box;
+}
+
 #content {
   margin: 50px 0 0 0;
 }
@@ -32,26 +37,27 @@ img.bg {
   position: fixed;
 }
 
-ul {
+ol {
   padding: 0;
-  margin: 10px;
 }
 
 li {
   list-style: none;
 }
 
-.lists > div > li {
+.lists {
+  vertical-align: top;
+}
+
+.list {
+  vertical-align: top;
+  display: inline-block;
   background: #DCDCDC;
   border: 1px solid #EEF3F6;
   border-radius: 5px;
   width: 200px;
   position: relative;
   margin: 10px 5px;
-}
-
-.cards > div {
-  width: 100%;
 }
 
 .hidden {
@@ -62,33 +68,4 @@ div.card-buttons {
   float: right;
   top: 0;
   right: 0;
-}
-
-div.card-buttons > button {
-  background: none;
-  border: none;
-}
-
-.cards > div > li {
-  background: #fff;
-  border: #D2D2D2;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-  width: 100%;
-}
-
-button.add-card {
-  display: block;
-  background: none;
-  border: none;
-  padding: 2px;
-}
-
-button.add-card:hover {
-  color: orange;
-}
-
-li {
-  float: left;
 }

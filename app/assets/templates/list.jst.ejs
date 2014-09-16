@@ -1,0 +1,20 @@
+<h3><%= model.escape("title") %></h3>
+
+<input id="expand-list-<%= ord %>" type="checkbox">
+<label for="expand-list-<%= ord %>"></label>
+<ol class="cards">
+</ol>
+
+<form class="hidden">
+  <label> Title<br>
+    <input name="title" type="text">
+  </label>
+  <label> Description<br>
+    <textarea name="description"></textarea>
+  </label>
+  <button>Create</button>
+</form>
+
+<a class="add" data-id="<%= model.id %>">
+  Add a card...
+</a>

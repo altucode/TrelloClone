@@ -3,7 +3,6 @@ TrelloClone.Models.List = Backbone.Model.extend({
   urlRoot: "api/lists",
   parse: function(response) {
     if (response.cards) {
-      var that = this;
       this.cards().set(response.cards, { parse: true });
       delete response.cards;
     }
@@ -11,6 +10,9 @@ TrelloClone.Models.List = Backbone.Model.extend({
     return response;
   },
   cards: function () {
-    return this._cards || (this._cards = new TrelloClone.Collections.Cards({}, { list: this}));
+    return this._cards || (this._cards = new TrelloClone.Collection([], {
+      model: TrelloClone.Models.Card,
+      url: 'api/cards'
+    }));
   }
 });

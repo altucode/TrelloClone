@@ -10,6 +10,8 @@
 #
 
 class BoardMembership < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :board
+  belongs_to :user, inverse_of: :board_memberships
+  belongs_to :board, inverse_of: :board_memberships
+
+  validates :user, :board, presence: true
 end
