@@ -2,9 +2,17 @@
   font-size: 14px;
 }
 
-div.card-buttons > button {
+div.card-tools {
+  float: right;
+}
+
+div.card-tools > a {
   background: none;
   border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .card {
@@ -13,4 +21,5 @@ div.card-buttons > button {
   border-radius: 5px;
   padding: 5px;
   margin-top: 5px;
+  min-height: 30px;
 }

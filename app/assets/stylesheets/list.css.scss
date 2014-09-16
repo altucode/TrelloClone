@@ -7,12 +7,13 @@
   font-size: 18px;
 }
 
-.lists > .list > input[type=checkbox],
-.lists > .list > input[type=checkbox] + label {
-  float: right;
+.lists > .list > input[type=checkbox] + div {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
-.lists > .list > input[type=checkbox] + label:hover {
+.lists > .list > input[type=checkbox] + div > label:hover {
   border-color: black;
   color: black;
 }

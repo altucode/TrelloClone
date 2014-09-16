@@ -45,13 +45,16 @@ TrelloClone.Views.ListView = Backbone.View.extend({
     'click .add': 'showForm',
     'click #clear': 'clearAll',
     'blur .input': 'updateItem',
-    'click .delete': 'removeItem'
+    'click li .delete': 'removeItem'
   },
   initialize: function (options) {
     options.tagName && (this.tagName = options.tagName);
     options.template && (this.template = options.template);
-    this.ord = options.ord;
-    this.listenTo(this.model, "add change remove", this.render);
+    if (this.ord = options.ord) {
+      this.$el.attr('data-ord', this.ord);
+    }
+    this.listenTo(this.model, "add change", this.render);
+    this.listenTo(this.collection(), "add change remove", this.render);
   },
 
   render: function(n) {
@@ -101,16 +104,18 @@ TrelloClone.Views.ListView = Backbone.View.extend({
   },
 
   removeItem: function(event) {
+    console.log("REMOVE", this.model.name);
     event.preventDefault();
-
     var item = this.collection().at($(event.target).parents('li').attr('data-ord'));
     this.collection().remove(item);
+    item.destroy();
+    return false;
   },
 
   updateItem: function(event) {
     event.preventDefault();
 
-    var item = this.collection().at($(event.target).parents('li').attr('data-index'));
+    var item = this.collection().at($(event.target).parents('li').attr('data-ord'));
     var hash = {};
     hash[$(event.target).attr('name')] = $(event.target).val();
     item.set(hash);
