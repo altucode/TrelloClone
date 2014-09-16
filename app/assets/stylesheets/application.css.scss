@@ -21,8 +21,8 @@
   box-style: border-box;
 }
 
-#content {
-  margin: 50px 0 0 0;
+body:nth-child(2) {
+  margin-top: 50px;
 }
 
 div {
