@@ -81,6 +81,7 @@ TrelloClone.Views.ListView = Backbone.View.extend({
     event.preventDefault();
 
     var item = $(event.target).serializeJSON();
+    item[this._assoc_name()] = this.model.id;
     this.collection().create(item, {
       success: function(model, response, options) {
         delete this.errors;
@@ -91,6 +92,7 @@ TrelloClone.Views.ListView = Backbone.View.extend({
         this.errors = response.responseText;
       }
     });
+    return false;
   },
 
   clearAll: function(event) {
@@ -129,5 +131,9 @@ TrelloClone.Views.ListView = Backbone.View.extend({
 
   subviews: function() {
     return this._subviews || (this._subviews = []);
+  },
+
+  _assoc_name: function() {
+    return this.model.name + "_id";
   }
 });
