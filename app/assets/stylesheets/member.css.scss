@@ -1,0 +1,9 @@
+.member a {
+  position: relative;
+}
+
+.member a > a {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

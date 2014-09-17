@@ -1,24 +1,24 @@
-.lists > .list {
+.list {
   padding: 5px;
 }
 
-.lists > .list > h3 {
+.list > h3 {
   display: inline;
   font-size: 18px;
 }
 
-.lists > .list > input[type=checkbox] + div {
+.list > input[type=checkbox] + div {
   position: absolute;
   top: 5px;
   right: 5px;
 }
 
-.lists > .list > input[type=checkbox] + div > label:hover {
+.list > input[type=checkbox] + div > label:hover {
   border-color: black;
   color: black;
 }
 
-a.add {
+.list .add {
   display: block;
   margin-top: 10px;
   color: gray;

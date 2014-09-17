@@ -2,21 +2,26 @@
 
 <input id="expand-list-<%= ord %>" type="checkbox" checked>
 <div>
-  <label for="expand-list-<%= ord %>" class="thumb"></label>
+  <label for="expand-list-<%= ord %>" class="arrow"></label>
 </div>
-<ol class="cards">
-</ol>
+<div class="on">
+  <ol class="cards">
+  </ol>
 
-<form class="hidden">
-  <label> Title<br>
-    <input name="title" type="text">
-  </label>
-  <label> Description<br>
-    <textarea name="description"></textarea>
-  </label>
-  <button>Create</button>
-</form>
-
-<a class="add" data-id="<%= model.id %>">
-  Add a card...
-</a>
+  <div class="toggler">
+    <input id="add-card-<%= ord %>" type="checkbox">
+    <label for="add-card-<%= ord %>" class="add off link" data-id="<%= model.id %>">
+      Add a card...
+    </label>
+    <form class="on">
+      <label> Title<br>
+        <input name="title" type="text">
+      </label>
+      <label> Description<br>
+        <textarea name="description"></textarea>
+      </label>
+      <button class="link">Create</button>
+      <label for="add-card-<%= ord %>" class="link">Cancel</label>
+    </form>
+  </div>
+</div>

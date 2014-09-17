@@ -1,6 +1,9 @@
 TrelloClone.Views.Board = TrelloClone.Views.ListView.extend({
   template: JST['board'],
   className: 'board',
-  itemView: function () { return TrelloClone.Views.List; },
-  collection: function() { return this.model.lists(); }
+  initialize: function(options) {
+    this.collection = this.model.lists();
+    TrelloClone.Views.ListView.prototype.initialize.call(this, options);
+  },
+  itemView: function () { return TrelloClone.Views.List; }
 });

@@ -7,7 +7,14 @@ json.title @board.title
 json.user_id @board.user_id
 
 json.lists @board.lists do |list|
-  json.id list.id
-  json.title list.title
-  json.cards list.cards, :title, :id, :description, :items
+  json.extract! list, :id, :title
+  json.cards list.cards do |card|
+    json.extract! card, :id, :title, :list_id, :description, :ord
+    json.members card.card_assignments do |assn|
+      json.extract! assn, :id, :user_id
+      json.email assn.user.email
+      json.gravatar_url assn.user.gravatar_url
+    end
+    json.items card.items
+  end
 end

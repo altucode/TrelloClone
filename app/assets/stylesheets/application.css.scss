@@ -41,6 +41,25 @@ ol {
   padding: 0;
 }
 
+.thumb {
+  display: inline-block;
+}
+
+.thumb,
+.thumb > img {
+  height: 50px;
+  width: 50px;
+  border-radius: 3px;
+}
+
+.link {
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: inherit;
+}
+
 li {
   list-style: none;
 }

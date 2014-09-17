@@ -1,0 +1,41 @@
+
+<h3><%= model.escape('title') %></h3>
+
+<div class="members">
+  <ol>
+    <li class="thumb toggler">
+      <input id="add-member" type="checkbox">
+      <label for="add-member" class="add off link">&#10010;</label>
+      <ol class="on popup">
+        <% available.forEach(function (member) { %>
+          <li class="thumb" data-id="<%= member.id %>">
+            <img src="<%= member.escape('gravatar_url') %>">
+          <li>
+        <% }); %>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+<div class="toggler">
+  <h4>Description</h4>
+  <input id="edit-desc" type="checkbox">
+  <label for="edit-desc"></label>
+  <p id="desc on"><%= model.escape('description') %></p>
+  <textarea name="description" id="desc off"><%= model.escape('description')%></textarea>
+</div>
+<meter value="<%= model.escape('percent_done') %>"></meter>
+
+<div id="items">
+  <ol>
+  </ol>
+  <div class="toggler">
+    <input id="add-item" type="checkbox">
+    <label for="add-item" class="add off link">Add item</label>
+    <form class="add on">
+      <input name="title" placeholder="Title">
+      <button class="link">Create</button>
+      <label for="add-item" class="link">Cancel</label>
+    </form>
+  </div>
+</div>

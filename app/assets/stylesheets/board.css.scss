@@ -1,0 +1,27 @@
+.board > .sidebar {
+  float: right;
+  background: #DCDCDC;
+  border: 1px solid #EEF3F6;
+  border-radius: 5px;
+  position: relative;
+  margin: 10px 5px;
+  padding: 8px;
+}
+
+.board > .sidebar > .content {
+  display: block;
+  width: 184px;
+  min-height: 150px;
+}
+
+.sidebar > input[type=checkbox]:not(:checked) + label.arrow {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+}
+
+.board > .sidebar > input[type=checkbox]:checked + label.arrow {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
