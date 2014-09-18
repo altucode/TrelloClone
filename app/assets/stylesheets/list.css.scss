@@ -27,6 +27,10 @@
   cursor: pointer;
 }
 
+.list.dragover {
+  border: 2px dotted blue;
+}
+
 a.add:hover {
   color: black;
 }

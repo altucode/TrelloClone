@@ -7,7 +7,7 @@ json.title @board.title
 json.user_id @board.user_id
 
 json.lists @board.lists do |list|
-  json.extract! list, :id, :title
+  json.extract! list, :id, :title, :ord
   json.cards list.cards do |card|
     json.extract! card, :id, :title, :list_id, :description, :ord
     json.members card.card_assignments do |assn|

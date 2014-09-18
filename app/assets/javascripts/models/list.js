@@ -12,7 +12,8 @@ TrelloClone.Models.List = Backbone.Model.extend({
   cards: function () {
     return this._cards || (this._cards = new TrelloClone.Collection([], {
       model: TrelloClone.Models.Card,
-      url: 'api/cards'
+      url: 'api/cards',
+      owner: this
     }));
   }
 });

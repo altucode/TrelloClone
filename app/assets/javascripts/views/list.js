@@ -2,7 +2,9 @@ TrelloClone.Views.List = TrelloClone.Views.ListView.extend({
   template: JST['list'],
   className: 'list toggler',
   events: {
-    'dragover': 'dragOver',
+    'dragenter': 'toggleDrag',
+    'dragleave': 'toggleDrag',
+    'dragover *': 'dragOver',
     'drop': 'drop'
   },
 
@@ -12,19 +14,26 @@ TrelloClone.Views.List = TrelloClone.Views.ListView.extend({
   },
   itemView: function () { return TrelloClone.Views.Card; },
 
+  toggleDrag: function (event) {
+    this.$el.toggleClass('dragover');
+    event.preventDefault();
+  },
+
   dragOver: function (event) {
-    if (event.dataTransfer.getData('card/id')) {
+    if (event.dataTransfer.types.indexOf('card/id') >= 0) {
       event.preventDefault();
     }
   },
 
-  drop: function (event) {
+  drop: function (event, ord) {
+    ord || (ord = 0);
     var id = event.dataTransfer.getData('card/id');
-    if (id) {
-      var list_id = event.dataTransfer.getData('card/list_id');
-      var model = this.parent.lists().get(list_id).cards().get(id);
-      this.parent.lists().get(list_id).cards().remove(model);
-      this.add()
+    if (typeof id != 'undefined') {
+      var list = this.model.collection.get(event.dataTransfer.getData('card/list_id'));
+      var model = list.cards().get(id);
+      list.cards().remove(model);
+      this.collection.insert(model, ord);
     }
+    this.toggleDrag(event);
   }
 });

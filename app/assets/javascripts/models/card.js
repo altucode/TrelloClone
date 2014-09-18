@@ -15,13 +15,15 @@ TrelloClone.Models.Card = Backbone.Model.extend({
   items: function () {
     return this._items || (this._items = new TrelloClone.Collection([], {
       model: TrelloClone.Models.Item,
-      url: 'api/items'
+      url: 'api/items',
+      owner: this
     }));
   },
   members: function() {
     return this._members || (this._members = new TrelloClone.Collection([], {
       model: TrelloClone.Models.User,
-      url: 'api/users'
+      url: 'api/users',
+      owner: this
     }))
   }
 });

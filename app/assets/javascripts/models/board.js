@@ -16,13 +16,15 @@ TrelloClone.Models.Board = Backbone.Model.extend({
   lists: function () {
     return this._lists || (this._lists = new TrelloClone.Collection([], {
       model: TrelloClone.Models.List,
-      url: 'api/lists'
+      url: 'api/lists',
+      owner: this
     }));
   },
   members: function () {
     return this._members || (this._members = new TrelloClone.Collection([], {
       model: TrelloClone.Models.User,
-      url: 'api/users'
+      url: 'api/users',
+      owner: this
     }))
   }
 });
