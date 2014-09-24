@@ -1,4 +1,4 @@
-TrelloClone.Views.CardModal = Backbone.View.extend({
+TrelloClone.Views.CardModal = TrelloClone.View.extend({
   template: JST['card_modal'],
   className: 'toggler modal',
 
@@ -9,7 +9,18 @@ TrelloClone.Views.CardModal = Backbone.View.extend({
     });
     var content = this.template({ model: this.model, available: available });
     this.$el.html(content);
-    this.itemView().setElement()
+    this.itemView().setElement(this.$el.find('#items'));
+    this.memberView().setElement(this.$el.find('.members'));
+    this.itemView().render();
+    this.memberView().render();
+
+    return this;
+  },
+  setModel: function(model) {
+    this.model = model;
+    this._itemView = null;
+    this._memberView = null;
+    this.render();
   },
   remove: function() {
     this.memberView().remove();
@@ -27,7 +38,8 @@ TrelloClone.Views.CardModal = Backbone.View.extend({
     return this._memberView || (this._memberView = new TrelloClone.Views.ListView({
       model: this.model,
       collection: this.model.members(),
-      selector: 'ol'
+      selector: 'ol',
+      pushFront: true
     }));
   }
 });

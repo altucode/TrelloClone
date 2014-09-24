@@ -1,6 +1,5 @@
 .cards {
-  padding: 10px 0;
-  background: blue;
+  padding-bottom: 10px;
 }
 
 .cards > .card > h4 {
@@ -30,7 +29,7 @@ div.card-tools > a {
 }
 
 .card.dragover {
-  border: 1px dotted red;
+  background: orange;
 }
 
 li.card {
