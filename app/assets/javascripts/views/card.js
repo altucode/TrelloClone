@@ -4,8 +4,9 @@ TrelloClone.Views.Card = TrelloClone.Views.ListView.extend({
   events: {
     'dragstart': 'dragStart',
     'dragover': 'dragOver',
-    'dragenter': 'dragEnter',
-    'dragleave': 'toggleDrag'
+    'dragenter': 'toggleDrag',
+    'dragleave': 'toggleDrag',
+    'drop': 'drop'
   },
   initialize: function(options) {
     this.collection = this.model.items();
@@ -18,15 +19,6 @@ TrelloClone.Views.Card = TrelloClone.Views.ListView.extend({
     event.dataTransfer.effectAllowed = 'move';
     event.dataTransfer.setData('card/id', this.model.id);
     event.dataTransfer.setData('card/list_id', this.model.get('list_id'));
-  },
-
-  dragEnter: function (event) {
-    if (event.dataTransfer.types.indexOf('card/id') >= 0) {
-      if (event.dataTransfer.getData('card/id') === this.model.id) {
-        event.preventDefault();
-      }
-      event.dataTransfer.setData('card/ord', this.index);
-    }
   },
 
   toggleDrag: function (event) {
@@ -45,6 +37,7 @@ TrelloClone.Views.Card = TrelloClone.Views.ListView.extend({
         event.preventDefault();
       }
       this.parent.drop(event, this.index);
+      event.stopPropagation();
     }
   },
 });

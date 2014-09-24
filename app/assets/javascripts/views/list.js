@@ -4,7 +4,7 @@ TrelloClone.Views.List = TrelloClone.Views.ListView.extend({
   events: {
     'dragenter': 'toggleDrag',
     'dragleave': 'toggleDrag',
-    'dragover *': 'dragOver',
+    'dragover': 'dragOver',
     'drop': 'drop'
   },
 

@@ -26,8 +26,6 @@ TrelloClone.Collection = Backbone.Collection.extend({
     if (! (models instanceof Array)) { models = [models]; }
     var collection = this;
     models.forEach(function (model) {
-      console.log(models);
-      console.log(model);
       collection.forEach(function (item) {
         if (item.get('ord') > model.get('ord')) {
           item.set('ord', item.get('ord') - 1);
@@ -53,10 +51,13 @@ TrelloClone.Collection = Backbone.Collection.extend({
   insert: function (model, i) {
     console.log("INSERT AT", i);
     model.set('ord', i);
-    while (i < this.length) {
-      this.at(i).set('ord', ++i);
+    for (var n = i; n < this.length;) {
+      this.at(n).set('ord', ++n);
     }
     this.add(model);
+    while (i < this.length) {
+      this.at(i++).save();
+    }
   },
   getOrFetch: function(id) {
     var collection = this;
@@ -129,7 +130,7 @@ TrelloClone.Views.ListView = TrelloClone.View.extend({
     var list = this;
     var i = 0;
     this.collection.forEach(function(model) {
-      var subview = new (list.itemView())({ tagName: 'li', model: model, index: i});
+      var subview = new (list.itemView())({ tagName: 'li', model: model, index: i, parent: list });
       list.subviews().push(subview);
       ele.append(subview.render().$el);
       ++i;
