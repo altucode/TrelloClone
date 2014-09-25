@@ -8,6 +8,10 @@
 </head>
 <body>
   <%= render partial: "layouts/header" %>
+  <div class="backdrop">
+    <img class="bg" src="<%= asset_path('backdrop.jpg') %>">
+    <div id="main"></div>
+  </div>
   <%= yield %>
 </body>
 </html>

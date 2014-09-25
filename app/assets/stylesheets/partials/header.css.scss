@@ -1,0 +1,42 @@
+.navbar {
+  position: fixed;
+  display: block;
+  width: 100%;
+  padding: 10px 100px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-logo {
+  color: #aaa;
+  margin-left: 45%;
+  font-size: 18px;
+}
+
+.navbar-right {
+  float: right;
+}
+
+.navbar-right li {
+  display: inline-block;
+}
+
+.navbar-right a,
+.navbar-right button {
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  background: linear-gradient( 0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.4));
+  padding: 5px 5px;
+  text-decoration: none;
+}
+
+.navbar-right a:hover,
+.navbar-right button:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-right a:active,
+.navbar-right button:active {
+  background: rgba(255, 255, 255, 0.2);
+}

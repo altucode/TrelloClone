@@ -86,19 +86,21 @@ TrelloClone.Model = Backbone.Model.extend({
 });
 
 TrelloClone.View = Backbone.View.extend({
-  template: function() { return ""; },
   initialize: function (options) {
+    options || (options = {});
     options.tagName && (this.tagName = options.tagName);
     options.template && (this.template = options.template);
     options.parent && (this.parent = options.parent);
-    options.index && (this.index = options.index);
+    options.hasOwnProperty('index') && (this.index = options.index);
+    this.model && this.listenTo(this.model, "change", this.render);
     Backbone.View.prototype.initialize.call(this, options);
   },
   render: function() {
-    var content = !!this.template && this.template({ model: this.model, ord: this.index });
-    if (typeof this.index != "undefined") { this.$el.attr('data-ord', this.index); }
-    this.$el.html(content);
-
+    if (this.template) {
+      var content = this.template({ model: this.model, ord: this.index });
+      if (typeof this.index != "undefined") { this.$el.attr('data-ord', this.index); }
+      this.$el.html(content);
+    }
     return this;
   },
   containsMouse: function(event) {
@@ -147,17 +149,21 @@ TrelloClone.View = Backbone.View.extend({
 });
 
 TrelloClone.Views.ListView = TrelloClone.View.extend({
+  itemView: function() { return TrelloClone.View; },
   events: {
     'submit form': 'addNew',
+    'blur .input.free:not([type=checkbox])': 'updateItem',
+    'click .input.free[type=checkbox]': 'updateItem',
     'click #clear': 'clearAll',
-    'blur .input': 'updateItem',
+    'click .save': 'saveItem',
     'click .delete': 'removeItem'
   },
   initialize: function (options) {
     options.itemView && (this.itemView = function () { return options.itemView; });
+    options.itemTemplate && (this.itemTemplate = options.itemTemplate);
     options.pushFront && (this.pushFront = options.pushFront);
+    options.emptyOnRender && (this.emptyOnRender = options.emptyOnRender);
     this.selector = options.selector || ('.' + this.collection.model.prototype.name + 's');
-    this.model && this.listenTo(this.model, "change", this.render);
     this.collection && this.listenTo(this.collection, "add change remove", this.render);
 
     TrelloClone.View.prototype.initialize.call(this, options);
@@ -167,11 +173,20 @@ TrelloClone.Views.ListView = TrelloClone.View.extend({
     TrelloClone.View.prototype.render.call(this);
 
     var ele = this.$el.find(this.selector);
+    if (this.emptyOnRender) {
+      ele.empty();
+    }
     var adder = this.pushFront ? ele.prepend : ele.append;
     var list = this;
     var i = 0;
     this.collection.forEach(function(model) {
-      var subview = new (list.itemView())({ tagName: 'li', model: model, index: i, parent: list });
+      var subview = new (list.itemView())({
+        template: list.itemTemplate,
+        tagName: 'li',
+        model: model,
+        index: i,
+        parent: list
+      });
       list.subviews().push(subview);
       adder.call(ele, subview.render().$el);
       ++i;
@@ -208,18 +223,32 @@ TrelloClone.Views.ListView = TrelloClone.View.extend({
   },
 
   removeItem: function(event) {
+    event.stopPropagation();
     var item = this.collection.at($(event.target).parents('li').attr('data-ord'));
     this.collection.remove(item);
     item.destroy();
     return false;
   },
 
+  saveItem: function(event) {
+    event.stopPropagation();
+    var item = this.collection.at($(event.target).parents('li').attr('data-ord'));
+    var siblings = $(event.target).siblings('.input:not([type=hidden])');
+    var hash = {};
+    siblings.each(function(i, e) {
+      hash[e.name] = e.type == 'checkbox' ? e.checked : e.value;
+    });
+    item.set(hash);
+    item.save();
+  },
+
   updateItem: function(event) {
+    event.stopPropagation();
     var item = this.collection.at($(event.target).parents('li').attr('data-ord'));
     var hash = {};
-    hash[$(event.target).attr('name')] = $(event.target).val();
+    hash[event.target.name] = event.target.type == 'checkbox' ? event.target.checked : event.target.value;
     item.set(hash);
-    return false;
+    item.save();
   },
 
   remove: function() {
@@ -243,8 +272,21 @@ TrelloClone.Views.ListView = TrelloClone.View.extend({
 });
 
 var Draggable = {
+  events: {
+    'dragstart': 'dragStart',
+  },
   initialize: function(options) {
     this.$el.attr('draggable', true);
+  },
+  dragStart: function(event) {
+    var props = this.dragProps();
+    event.dataTransfer.effectAllowed = 'move';
+    for (var i = 0; i < props.length; ++i) {
+      event.dataTransfer.setData(this.model.name + '/' + props[i], this.model.get(props[i]));
+    }
+  },
+  dragProps: function() {
+    return [];
   }
 };
 
@@ -265,10 +307,15 @@ var Droppable = {
     }
   },
   isDropTarget: function (event) {
-    return true;
+    return (event.dataTransfer.types.indexOf(this.collection.name + '/id') >= 0) ||
+            (event.dataTransfer.types.indexOf(this.model.name + '/id') >= 0);
   },
   _drop: function(event) {
     this.$el.removeClass('dragover');
     return this.drop(event);
   }
+};
+
+var Sortable = {
+
 };

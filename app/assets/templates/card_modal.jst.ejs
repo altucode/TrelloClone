@@ -1,41 +1,36 @@
+<div class="card window">
+  <label class="tool" for="toggle-modal">✕</label>
+  <h3><%= model.escape('title') %></h3>
 
-<h3><%= model.escape('title') %></h3>
+  <div class="members">
+  </div>
 
-<div class="members">
-  <ol>
-    <li class="thumb toggler">
-      <input id="add-member" type="checkbox">
-      <label for="add-member" class="add off link">&#10010;</label>
-      <ol class="on popup">
-        <% available.forEach(function (member) { %>
-          <li class="thumb" data-id="<%= member.id %>">
-            <img src="<%= member.escape('gravatar_url') %>">
-          <li>
-        <% }); %>
-      </ol>
-    </li>
-  </ol>
-</div>
-
-<div class="toggler">
-  <h4>Description</h4>
-  <input id="edit-desc" type="checkbox">
-  <label for="edit-desc"></label>
-  <p id="desc on"><%= model.escape('description') %></p>
-  <textarea name="description" id="desc off"><%= model.escape('description')%></textarea>
-</div>
-<meter value="<%= model.escape('percent_done') %>"></meter>
-
-<div id="items">
-  <ol>
-  </ol>
   <div class="toggler">
-    <input id="add-item" type="checkbox">
-    <label for="add-item" class="add off link">Add item</label>
-    <form class="add on">
-      <input name="title" placeholder="Title">
-      <button class="link">Create</button>
-      <label for="add-item" class="link">Cancel</label>
-    </form>
+    <input id="edit-desc" type="checkbox">
+    <h4>
+      Description
+    </h4>
+    <label class="tool off" for="edit-desc">✎</label>
+    <label class="tool save on" for="edit-desc">✓</label>
+    <label class="tool cancel on" for="edit-desc">✗</label>
+    <p class="desc off"><%= model.escape('description') %></p>
+    <textarea name="description" class="desc on input"><%= model.escape('description')%></textarea>
+  </div>
+  <meter value="<%= model.escape('percent_done') %>"></meter>
+
+  <div id="items">
+    <ol>
+    </ol>
+    <div class="toggler">
+      <input id="add-item" type="checkbox">
+      <label for="add-item" class="add off link" data-id="<%= model.id %>">
+        Add item
+      </label>
+      <form class="on">
+        <input name="title" type="text" placeholder="Title">
+        <button class="link">Create</button>
+        <label for="add-item" class="link">Cancel</label>
+      </form>
+    </div>
   </div>
 </div>

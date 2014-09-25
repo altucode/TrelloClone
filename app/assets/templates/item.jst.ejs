@@ -1,4 +1,20 @@
+<input id="edit-item-<%= ord %>" type="checkbox">
 <h5 class="<%= model.escape('done') ? 'done' : '' %>">
-  <%= model.escape("title") %>
+
+  <input
+    name="done"
+    type="checkbox"
+    class="free input"
+    <%= model.escape('done') == 'true' ? 'checked' : '' %>>
+  <label class="off"><%= model.escape("title") %></label>
+  <input
+    name="title"
+    class="on input"
+    type="text"
+    value="<%= model.escape("title") %>">
+  <label class="tool off" for="edit-item-<%= ord %>" title="Edit">✎</label>
+  <label class="tool delete off" title="Remove">✕</label>
+  <label class="tool save on" for="edit-item-<%= ord %>" title="Save">✓</label>
+  <label class="tool cancel on" for="edit-item-<%= ord %>" title="Cancel">✗</label>
 </h5>
 

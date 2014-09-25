@@ -11,15 +11,8 @@ TrelloClone.Views.List = TrelloClone.Views.ListView.extend({
   },
   itemView: function () { return TrelloClone.Views.Card; },
 
-  isDropTarget: function(event) {
-    return (event.dataTransfer.types.indexOf('card/id') >= 0) ||
-            (event.dataTransfer.types.indexOf('list/id') >= 0);
-  },
-
-  dragStart: function (event) {
-    event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('list/id', this.model.id);
-    event.dataTransfer.setData('list/board_id', this.model.get('list_id'));
+  dragProps: function () {
+    return ['id', 'board_id'];
   },
 
   drop: function (event, ord) {

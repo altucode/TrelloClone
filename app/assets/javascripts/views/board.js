@@ -9,15 +9,13 @@ TrelloClone.Views.Board = TrelloClone.Views.ListView.extend({
 
   render: function () {
     TrelloClone.Views.ListView.prototype.render.call(this);
-    this.$el.append(this.cardModal().render().$el);
+    this.$el.find('#card-modal-toggler').append(this.cardModal().render().$el);
 
     return this;
   },
 
   cardModal: function () {
-    return this._cardModal || (this._cardModal = new TrelloClone.Views.CardModal({
-      model: new TrelloClone.Models.Card()
-    }));
+    return this._cardModal || (this._cardModal = new TrelloClone.Views.CardModal());
   },
   isDropTarget: function(event) {
     return (event.dataTransfer.types.indexOf('list/id') >= 0);

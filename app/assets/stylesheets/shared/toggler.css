@@ -20,13 +20,12 @@
 
 .toggler > input[type=checkbox] + label.arrow,
 .toggler > input[type=checkbox] + * > label.arrow {
+  display: inline-block;
   color: gray;
   line-height: 9px;
   border: 2px solid gray;
   border-radius: 9px;
-  padding-top: 2px;
-  padding-left: 1px;
-  padding-bottom: 1px;
+  padding: 2px 1px 0 1px;
   cursor: pointer;
 }
 

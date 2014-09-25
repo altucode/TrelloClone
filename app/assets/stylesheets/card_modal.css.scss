@@ -1,0 +1,46 @@
+.card.modal {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.card.window {
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  margin-left: -200px;
+  background: lightgray;
+  width: 400px;
+}
+
+.card.window > .tool {
+  float: right;
+  margin: 5px 5px 0 0;
+}
+
+.card.window > .toggler > h4 {
+  display: inline-block;
+}
+
+.card.window > .toggler > textarea {
+  display: block;
+}
+
+.tool.save {
+  color: #5A5;
+}
+
+.tool.save:hover {
+  color: #1B1;
+}
+
+.tool.cancel {
+  color: #A55;
+}
+
+.tool.cancel:hover {
+  color: #B11;
+}

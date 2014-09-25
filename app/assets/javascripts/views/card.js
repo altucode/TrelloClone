@@ -2,7 +2,7 @@ TrelloClone.Views.Card = TrelloClone.Views.ListView.extend({
   template: JST['card'],
   className: 'card',
   events: {
-    'dragstart': 'dragStart'
+    'click .tool.edit': 'showModal'
   },
   initialize: function(options) {
     this.collection = this.model.items();
@@ -11,14 +11,12 @@ TrelloClone.Views.Card = TrelloClone.Views.ListView.extend({
   },
   itemView: function () { return TrelloClone.Views.Item; },
 
-  isDropTarget: function(event) {
-    return (event.dataTransfer.types.indexOf('card/id') >= 0);
+  dragProps: function () {
+    return ['id', 'list_id'];
   },
 
-  dragStart: function (event) {
-    event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('card/id', this.model.id);
-    event.dataTransfer.setData('card/list_id', this.model.get('list_id'));
+  showModal: function (event) {
+    this.parent.parent.cardModal().setModel(this.model);
   },
 
   drop: function (event) {

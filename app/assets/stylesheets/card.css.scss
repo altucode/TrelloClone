@@ -19,7 +19,8 @@ div.card-tools > a {
   text-decoration: none;
 }
 
-.card {
+.cards .card {
+  position: relative;
   background: #fff;
   border: #D2D2D2;
   border-radius: 5px;
@@ -28,10 +29,6 @@ div.card-tools > a {
   min-height: 30px;
 }
 
-.card.dragover {
+.cards .card.dragover {
   background: orange;
-}
-
-li.card {
-  position: relative;
 }

@@ -7,3 +7,32 @@
   top: 0;
   right: 0;
 }
+
+.thumb.link {
+  position: relative;
+  text-align: center;
+  line-height: 25px;
+  vertical-align: bottom;
+  background: darkgray;
+}
+
+.thumb.link:hover {
+  background: gray;
+}
+
+.thumb.link > .popup {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  min-width: 100px;
+  min-height: 50px;
+  background: gray;
+  z-index: 200;
+  border-radius: 2px;
+}
+
+.thumb.link:active > .popup,
+.thumb.link > .popup:hover {
+  display: block;
+}

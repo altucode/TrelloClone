@@ -14,6 +14,12 @@ module Api
       end
     end
 
+    def destroy
+      @item = Item.find(params[:id])
+      @item.try(:destroy)
+      render json: {}
+    end
+
     def update
       @item = Item.find(params[:id])
       if @item.update(item_params)
