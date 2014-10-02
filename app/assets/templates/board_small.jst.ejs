@@ -1,0 +1,11 @@
+<h3>
+  <a href="#/boards/<%= model.escape('id') %>">
+    <%= model.escape('title') %>
+  </a>
+  <a
+    class="thumb"
+    href="mailto:<%= model.user().escape('email') %>"
+    title="<%= model.user().escape('email')%>">
+    <img src="<%= model.user().escape('gravatar_url') %>">
+  </a>
+</h3>

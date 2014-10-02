@@ -4,6 +4,7 @@
   </a>
   <ul class="navbar-right">
     <% if signed_in? %>
+      <li><a href="#/boards">Boards</a></li>
       <li>
         <form class="wrapper" action="<%= session_url %>" method="POST">
                   <input

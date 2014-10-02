@@ -87,13 +87,14 @@ TrelloClone.Model = Backbone.Model.extend({
 
 TrelloClone.View = Backbone.View.extend({
   initialize: function (options) {
-    options || (options = {});
-    options.tagName && (this.tagName = options.tagName);
-    options.template && (this.template = options.template);
-    options.parent && (this.parent = options.parent);
-    options.hasOwnProperty('index') && (this.index = options.index);
-    this.model && this.listenTo(this.model, "change", this.render);
+    if (options) {
+      options.template && (this.template = options.template);
+      options.parent && (this.parent = options.parent);
+      options.hasOwnProperty('index') && (this.index = options.index);
+    }
     Backbone.View.prototype.initialize.call(this, options);
+    console.log(_.result(this, 'className'));
+    this.model && this.listenTo(this.model, "change", this.render);
   },
   render: function() {
     if (this.template) {
@@ -152,8 +153,8 @@ TrelloClone.Views.ListView = TrelloClone.View.extend({
   itemView: function() { return TrelloClone.View; },
   events: {
     'submit form': 'addNew',
-    'blur .input.free:not([type=checkbox])': 'updateItem',
-    'click .input.free[type=checkbox]': 'updateItem',
+    'blur li .input.free:not([type=checkbox])': 'updateItem',
+    'click li .input.free[type=checkbox]': 'updateItem',
     'click #clear': 'clearAll',
     'click .save': 'saveItem',
     'click .delete': 'removeItem'
@@ -205,7 +206,9 @@ TrelloClone.Views.ListView = TrelloClone.View.extend({
   addNew: function(event) {
     console.log(this);
     var item = $(event.target).serializeJSON();
-    item[this._model_name() + "_id"] = this.model.id;
+    if (this.model) {
+      item[this._model_name() + "_id"] = this.model.id;
+    }
     this.collection.create(item, {
       success: function(model, response, options) {
         delete this.errors;

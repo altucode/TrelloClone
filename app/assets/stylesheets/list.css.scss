@@ -7,6 +7,11 @@
   font-size: 18px;
 }
 
+.list > h3 > input {
+  width: 90%;
+  margin: auto;
+}
+
 .list > input[type=checkbox] + div {
   position: absolute;
   top: 5px;
@@ -33,4 +38,8 @@
 
 a.add:hover {
   color: black;
+}
+
+.list form .input {
+  display: block;
 }

@@ -6,6 +6,10 @@
 json.title @board.title
 json.user_id @board.user_id
 
+json.owner @board.user_id == current_user.id
+
+json.user @board.user, :id, :email, :gravatar_url
+
 json.lists @board.lists do |list|
   json.extract! list, :id, :title, :ord
   json.cards list.cards do |card|

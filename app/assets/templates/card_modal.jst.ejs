@@ -1,6 +1,16 @@
 <div class="card window">
   <label class="tool" for="toggle-modal">✕</label>
-  <h3><%= model.escape('title') %></h3>
+  <h3 class="toggler">
+    <input id="edit-title" type="checkbox">
+    <span class="title off"><%= model.escape('title') %></span>
+    <input
+      name="title"
+      class="title on input"
+      value="<%= model.escape('title') %>">
+    <label class="tool off" for="edit-title">✎</label>
+    <label class="tool save on" for="edit-title">✓</label>
+    <label class="tool cancel on" for="edit-title">✗</label>
+  </h3>
 
   <div class="members">
   </div>

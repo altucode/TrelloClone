@@ -4,7 +4,7 @@ module Api
       @board = current_user.boards.new(board_params)
 
       if @board.save
-        render json: @board
+        render :show
       else
         render json: @board.errors.full_messages, status: :unprocessable_entity
       end
@@ -18,7 +18,6 @@ module Api
 
     def index
       @boards = current_user.boards
-      render json: @boards
     end
 
     def show

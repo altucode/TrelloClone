@@ -2,11 +2,15 @@
   position: relative;
 }
 
+
+
 .toggler > input[type=checkbox],
 .toggler > input[type=checkbox]:checked ~ .off,
-.toggler > input[type=checkbox]:checked ~ *:not(.on):not(.off) .off,
+.toggler > input[type=checkbox]:checked ~ * > .off:first-child,
+.toggler > input[type=checkbox]:checked ~ * > *:not([type=checkbox]) ~ .off,
 .toggler > input[type=checkbox]:not(:checked) ~ .on,
-.toggler > input[type=checkbox]:not(:checked) ~ *:not(.on):not(.off) .on {
+.toggler > input[type=checkbox]:not(:checked) ~ * > .on:first-child,
+.toggler > input[type=checkbox]:not(:checked) ~ * > *:not([type=checkbox]) ~ .on {
   display: none;
 }
 

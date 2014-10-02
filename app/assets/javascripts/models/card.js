@@ -14,7 +14,6 @@ TrelloClone.Models.Card = Backbone.Model.extend({
   },
   items: function () {
     return this._items || (this._items = new TrelloClone.Collection([], {
-      model: TrelloClone.Models.Item,
       url: 'api/items',
       owner: this,
       comparator: 'id'
@@ -22,8 +21,7 @@ TrelloClone.Models.Card = Backbone.Model.extend({
   },
   members: function() {
     return this._members || (this._members = new TrelloClone.Collection([], {
-      model: TrelloClone.Models.User,
-      url: 'api/users',
+      url: 'api/card_assignments',
       owner: this
     }))
   }

@@ -1,0 +1,47 @@
+#your-boards {
+  color: #fff;
+  vertical-align: top;
+}
+
+#your-boards,
+#your-boards ~ * {
+  margin-left: 10px;
+}
+
+.boards {
+}
+
+.boards > li {
+  vertical-align: top;
+  display: inline-block;
+  min-width: 120px;
+  max-width: 250px;
+  margin: 10px 0 0 10px;
+  background: lightgray;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.boards > li .thumb {
+  float: right;
+}
+
+#plus-board {
+  vertical-align: top;
+  display: inline-block;
+  background: lightgray;
+  min-height: 20px;
+  min-width: 20px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 3px;
+  padding-bottom: 1px;
+}
+
+#plus-board > label {
+  vertical-align: middle;
+}
+
+#plus-board > form {
+  margin: 2px;
+}

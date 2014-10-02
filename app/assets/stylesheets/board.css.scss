@@ -36,3 +36,30 @@
   -moz-transform: rotate(180deg);
   -o-transform: rotate(180deg);
 }
+
+.board .dialog {
+  width: 200px;
+  text-align: center;
+  background: lightgray;
+  border-radius: 2px;
+  padding: 5px;
+}
+
+.board .dialog p {
+  text-align: center;
+  padding: 5px 4px;
+}
+
+.board .dialog .button {
+  color: black;
+  font-size: 14px;
+  border: 2px solid gray;
+  border-radius: 3px;
+  background: darkgray;
+  cursor: pointer;
+}
+
+.board .dialog .button:hover {
+  border-color: darkgray;
+  background: gray;
+}

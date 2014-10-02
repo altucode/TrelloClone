@@ -50,6 +50,10 @@ ol {
   display: inline-block;
 }
 
+a {
+  text-decoration: none;
+}
+
 .thumb,
 .thumb > img {
   height: 25px;
@@ -57,7 +61,7 @@ ol {
   border-radius: 3px;
 }
 
-.link, .tool {
+.link, .linklike, .tool {
   font-size: 14px;
   background: none;
   border: none;
@@ -87,7 +91,6 @@ li {
 }
 
 .lists {
-  vertical-align: top;
 }
 
 .list {
@@ -107,4 +110,29 @@ li {
 
 p {
   font-size: 12px;
+}
+
+.modal-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .3);
+}
+
+.dialog {
+  margin: auto;
+  margin-top: 150px;
+}
+
+input.fill-in {
+  border: none;
+  font-size: inherit;
+  background: inherit;
+  border-bottom: 1px dotted black;
+}
+
+input.fill-in:focus {
+  border-bottom: 1px solid black;
 }

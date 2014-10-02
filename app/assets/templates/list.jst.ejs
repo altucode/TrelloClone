@@ -1,4 +1,7 @@
-<h3><%= model.escape("title") %></h3>
+<h3>
+  <label class="off"><%= model.escape("title") %></label>
+  <input name="title" class="input fill-in free on" value="<%= model.escape('title') %>">
+</h3>
 
 <input id="expand-list-<%= ord %>" type="checkbox" checked>
 <div>
@@ -15,10 +18,10 @@
     </label>
     <form class="on">
       <label> Title<br>
-        <input name="title" type="text">
+        <input class="input" name="title" type="text">
       </label>
       <label> Description<br>
-        <textarea name="description"></textarea>
+        <textarea class="input" name="description"></textarea>
       </label>
       <button class="link">Create</button>
       <label for="add-card-<%= ord %>" class="link">Cancel</label>

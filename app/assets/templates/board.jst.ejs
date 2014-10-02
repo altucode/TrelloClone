@@ -1,6 +1,11 @@
+<input
+  id="owner-access"
+  type="checkbox"
+  <%= model.escape('owner') ? 'checked' : '' %>>
 <div class="toggler sidebar">
   <input id="sidebar-expand" type="checkbox" checked>
   <label for="sidebar-expand" class="arrow"></label>
+  <label class="link" for="toggle-delete">Disband</label>
   <div class="content on">
 
     <div class="members">
@@ -12,9 +17,36 @@
     <hr>
   </div>
 </div>
-<h2><%= model.escape('title') %></h2>
+<h2>
+  <%= model.escape('title') %>
+  <div id="plus-list" class="toggler">
+    <input id="add-list" type="checkbox">
+    <label for="add-list" class="add off link">
+      &#10010;
+    </label>
+    <form class="on">
+      <input name="title" type="text" placeholder="Title">
+      <button class="link">Create</button>
+      <label for="add-list" class="link">Cancel</label>
+    </form>
+  </div>
+</h2>
 <ol class="lists">
 </ol>
 <div id="card-modal-toggler" class="toggler">
   <input id="toggle-modal" type="checkbox">
 </div>
+<% if (model.escape('owner')) { %>
+  <div class="toggler">
+    <input id="toggle-delete" type="checkbox">
+    <div class="modal-screen on">
+      <div class="dialog">
+        <p>
+          Are you sure you want to disband this board? All lists, cards, items and assignments will be deleted permanently.
+        </p>
+        <a href="#/boards" id="disband-confirm" class="button">Disband</a>
+        <label for="toggle-delete" class="button">Cancel</label>
+      </div>
+    </div>
+  </div>
+<% } %>

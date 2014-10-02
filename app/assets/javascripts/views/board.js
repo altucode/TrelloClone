@@ -1,6 +1,9 @@
 TrelloClone.Views.Board = TrelloClone.Views.ListView.extend({
   template: JST['board'],
-  className: 'board',
+  className: 'board toggler',
+  events: {
+    'click #disband-confirm': 'disband'
+  },
   initialize: function(options) {
     this.collection = this.model.lists();
     TrelloClone.Views.ListView.prototype.initialize.call(this, options);
@@ -12,6 +15,10 @@ TrelloClone.Views.Board = TrelloClone.Views.ListView.extend({
     this.$el.find('#card-modal-toggler').append(this.cardModal().render().$el);
 
     return this;
+  },
+
+  disband: function() {
+    this.model.destroy();
   },
 
   cardModal: function () {
